@@ -1,0 +1,52 @@
+{
+    "Variables": {
+        "profile": "synthesis-dev",
+        "region": "us-east-2",
+        "creation_date": "31-03-2020",
+        "vpc_id": "vpc-042aef62c68ce9210",
+        "subnet_id": "subnet-030e001711c8e3487",
+        "environment": "dev"
+    },
+    "Builders": [{
+        "type": "amazon-ebs",
+        "profile": "{{user `profile`}}",
+        "region": "{{user `region`}}",
+        "instance_type": "t3.xlarge",
+        "source_ami_filter": {
+            "filters": {
+            "virtualization-type": "hvm",
+            "name": "amzn2-ami-hvm-*-x86_64-gp2",
+            "root-device-type": "ebs"
+            },
+            "owners": ["137112412989"],
+            "most_recent": true
+        },
+        "ssh_username": "ec2-user",
+        "ami_name": "{{user `environment`}}-wordpress-latest-AMZN-{{isotime \"02-Jan-06 03-04-05\"}}",
+        "ami_description": "Base wordpress AMI",
+        "run_tags": {
+            "Name": "Buidling ... {{user `environment`}}-wordpress-latest-AMZN-{{isotime \"02-Jan-06 03-04-05\"}}",
+            "TeamEmailAddress": "adan@synthesis.co.za",
+            "BuildBy": "Packer"
+        },
+        "tags": {
+            "Build_By": "Packer",
+            "Creation_Date": "{{user `creation_date`}}",
+            "Name": "{{user `environment`}}-wordpress-latest-AMZN-baseimage-{{isotime \"02-Jan-06 03-04-05\"}}"
+        },
+        "vpc_id": "{{user `vpc_id`}}",
+        "subnet_id": "{{user `subnet_id`}}"
+    }],
+    "Provisioners": [
+        {
+            "type": "shell",
+            "script": "./user_data.sh",
+            "execute_command": "sudo -E -S sh '{{ .Path }}'"
+        },
+        {
+            "type": "shell",
+            "script": "./php_installation.sh",
+            "execute_command": "sudo -E -S sh '{{ .Path }}'"
+        }
+    ]
+}
