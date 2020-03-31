@@ -11,7 +11,7 @@
         "type": "amazon-ebs",
         "profile": "{{user `profile`}}",
         "region": "{{user `region`}}",
-        "instance_type": "t3.xlarge",
+        "instance_type": "t2.micro",
         "source_ami_filter": {
             "filters": {
             "virtualization-type": "hvm",
@@ -40,13 +40,17 @@
     "Provisioners": [
         {
             "type": "shell",
-            "script": "./user_data.sh",
-            "execute_command": "sudo -E -S sh '{{ .Path }}'"
+            "inline": [
+                "sudo amazon-linux-extras enable ansible2 && sudo yum install -y ansible"
+            ]
         },
         {
-            "type": "shell",
-            "script": "./php_installation.sh",
-            "execute_command": "sudo -E -S sh '{{ .Path }}'"
+            "type": "ansible-local",
+            "playbook_file": "ansible/playbook.yaml",
+            "role_paths": [
+                "ansible/roles/common"
+            ],
+            "playbook_dir": "ansible"
         }
     ]
 }
