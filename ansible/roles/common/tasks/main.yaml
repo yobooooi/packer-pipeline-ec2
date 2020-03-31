@@ -1,0 +1,14 @@
+---
+- name: upgrade all packages
+  yum:
+    name: "*"
+    state: latest
+  become: true
+  become_user: root
+
+- name: install git
+  yum:
+    name: git
+    state: present
+  become: true
+  become_user: root 
