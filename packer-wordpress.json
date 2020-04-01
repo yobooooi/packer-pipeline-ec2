@@ -46,10 +46,7 @@
         },
         {
             "type": "ansible-local",
-            "playbook_file": "ansible/playbook.yaml",
-            "role_paths": [
-                "ansible/roles/common"
-            ],
+            "playbook_file": "ansible/wordpress.yaml",
             "playbook_dir": "ansible"
         }
     ]
