@@ -1,10 +1,10 @@
 {
     "Variables": {
-        "profile": "synthesis-dev",
-        "region": "us-east-2",
-        "creation_date": "31-03-2020",
-        "vpc_id": "vpc-042aef62c68ce9210",
-        "subnet_id": "subnet-030e001711c8e3487",
+        "profile": "sanlam-sb001",
+        "region": "eu-west-1",
+        "creation_date": "02-04-2020",
+        "vpc_id": "vpc-0306eda6f9928750e",
+        "subnet_id": "subnet-0539b64619def41d1",
         "environment": "dev"
     },
     "Builders": [{
