@@ -1,17 +1,17 @@
 {
     "Variables": {
-        "profile": "synthesis-dev",
-        "region": "us-east-2",
-        "creation_date": "31-03-2020",
-        "vpc_id": "vpc-042aef62c68ce9210",
-        "subnet_id": "subnet-030e001711c8e3487",
+        "profile": "sanlam-sb001",
+        "region": "eu-west-1",
+        "creation_date": "02-04-2020",
+        "vpc_id": "vpc-0306eda6f9928750e",
+        "subnet_id": "subnet-0539b64619def41d1",
         "environment": "dev"
     },
     "Builders": [{
         "type": "amazon-ebs",
         "profile": "{{user `profile`}}",
         "region": "{{user `region`}}",
-        "instance_type": "t3.xlarge",
+        "instance_type": "t2.micro",
         "source_ami_filter": {
             "filters": {
             "virtualization-type": "hvm",
@@ -40,13 +40,14 @@
     "Provisioners": [
         {
             "type": "shell",
-            "script": "./user_data.sh",
-            "execute_command": "sudo -E -S sh '{{ .Path }}'"
+            "inline": [
+                "sudo amazon-linux-extras enable ansible2 && sudo yum install -y ansible"
+            ]
         },
         {
-            "type": "shell",
-            "script": "./php_installation.sh",
-            "execute_command": "sudo -E -S sh '{{ .Path }}'"
+            "type": "ansible-local",
+            "playbook_file": "ansible/wordpress.yaml",
+            "playbook_dir": "ansible"
         }
     ]
 }

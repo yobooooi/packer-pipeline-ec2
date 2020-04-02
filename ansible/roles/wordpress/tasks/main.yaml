@@ -1,0 +1,87 @@
+---
+- name: enable epel package
+  shell: "amazon-linux-extras enable epel"
+  become: yes
+  become_user: root
+
+- name: install epel-release
+  yum:
+    name: epel-release
+    state: present
+  become: true
+  become_user: root 
+
+- name: install remi-release
+  yum:
+    name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+    state: present
+  become: true
+  become_user: root 
+
+- name: upgrade all packages
+  yum:
+    name: "*"
+    state: latest
+  become: true
+  become_user: root
+
+- name: install php packages
+  yum: 
+    name:
+      - php70
+      - php70-php
+      - php70-php-cli
+      - php70-php-common
+      - php70-php-common
+      - php70-php-embedded
+      - php70-php-gd
+      - php70-php-json
+      - php70-php-ldap
+      - php70-php-mbstring
+      - php70-php-mcrypt
+      - php70-php-mysqlnd
+      - php70-php-opcache
+      - php70-php-pdo
+      - php70-php-pear
+      - php70-php-pecl-zip
+      - php70-php-process
+      - php70-php-soap
+      - php70-php-xml
+      - php70-runtime
+      - php73
+      - php73-php
+      - php73-php-cli
+      - php73-php-common
+      - php73-php-embedded
+      - php73-php-gd
+      - php73-php-json
+      - php73-php-ldap
+      - php73-php-mbstring
+      - php73-php-mysqlnd
+      - php73-php-opcache
+      - php73-php-pdo
+      - php73-php-pear
+      - php73-php-pecl-mcrypt
+      - php73-php-pecl-zip
+      - php73-php-process
+      - php73-php-soap
+      - php73-php-xml
+      - php73-runtime
+    state: present
+  become: yes
+  become_user: root
+
+- name: install httpd webserver
+  yum:
+    name: httpd
+    state: present
+  become: true
+  become_user: root
+
+- name: start and enable httpd
+  systemd:
+    name: httpd
+    state: started
+    enabled: yes
+  become: true
+  become_user: root
