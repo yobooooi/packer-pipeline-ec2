@@ -13,7 +13,9 @@ phases:
         - ./packer build -color=false $PACKER_SCRIPT.json | tee build.log
     post_build:
         commands:
-        - echo "build completed on `date`"
+          - egrep "${AWS_REGION}\:\sami\-" build.log | cut -d' ' -f2 > ami_id.txt
+          - test -s ami_id.txt || exit 1
+          - echo "build completed on `date`"
 artifacts:
     files:
         - build.log
