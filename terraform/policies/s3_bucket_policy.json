@@ -1,0 +1,21 @@
+{
+    "Version": "2012-10-17",
+    "Id": "BURCBPOLICY",
+    "Statement": [
+        {
+            "Sid": "AllowCodeBuild",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "${codebuild_role}",
+                    "${codepipeline_role}"
+                ]
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "${bucket_arn}",
+                "${bucket_arn}/*"
+            ]
+        }
+    ]
+}
