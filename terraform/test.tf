@@ -1,14 +1,14 @@
 provider "aws" {
     region  = "eu-west-1"
-    profile = "synthesis-internal-dev"
+    profile = "sanlam-sbx001"
 }
 
 module "codepipline" {
     source = "git::https://bitbucket.org/synthesis_admin/module-aws-codepipeline.git"
 
-    project_name         = "wordpress-ami-pipeline"
-    project_description  = "wordpress AMI pipeline builder using the AMI builder repository"
-    artefact_bucket_name = "wordpress-ami-builder-artifact-bucket"
+    project_name         = "ami-pipeline"
+    project_description  = "AMI pipeline builder using the AMI builder repository"
+    artefact_bucket_name = "ami-builder-artifact-bucket"
     
     # Name of the AMI-Builder CodeCommit Repository
     source_repository    = "ami-builder"
@@ -18,7 +18,7 @@ module "codepipline" {
     # variables are optional.
     environment_vars = {
       PACKER_SCRIPT  = "packer-wordpress"
-      VPC_ID         = "vpc-04f99e5833c3a909b"
-      SUBNET_ID      = "subnet-0e3c6194859275f16"
+      VPC_ID         = "vpc-0306eda6f9928750e"
+      SUBNET_ID      = "subnet-0539b64619def41d1"
     }
 }
