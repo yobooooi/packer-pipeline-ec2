@@ -4,7 +4,9 @@
         "creation_date": "{{isotime \"02-Jan-06 03-04-05\"}}",
         "vpc_id": "{{env `VPC_ID`}}",
         "subnet_id": "{{env `SUBNET_ID`}}",
-        "environment": "dev"
+        "environment": "dev",
+        "BuilderNumer": "{{env `CODEBUILD_BUILD_NUMBER`}}",
+        "CodeBuildID": "{{env `CODEBUILD_BUILD_ID`}}"
     },
     "Builders": [{
         "type": "amazon-ebs",
@@ -30,7 +32,9 @@
         "tags": {
             "Build_By": "Packer",
             "Creation_Date": "{{user `creation_date`}}",
-            "Name": "{{user `environment`}}-wordpress-latest-AMZN-baseimage-{{isotime \"02-Jan-06 03-04-05\"}}"
+            "Name": "{{user `environment`}}-wordpress-latest-AMZN-baseimage-{{isotime \"02-Jan-06 03-04-05\"}}",
+            "BuilderNumer": "{{user `BuilderNumer`}}",
+            "CodeBuildID" : "{{user `CodeBuildID`}}"
         },
         "vpc_id": "{{user `vpc_id`}}",
         "subnet_id": "{{user `subnet_id`}}"
