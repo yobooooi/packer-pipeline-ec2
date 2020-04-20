@@ -1,15 +1,13 @@
 {
     "Variables": {
-        "profile": "sanlam-sb001",
-        "region": "eu-west-1",
-        "creation_date": "02-04-2020",
-        "vpc_id": "vpc-0306eda6f9928750e",
-        "subnet_id": "subnet-0539b64619def41d1",
+        "region": "{{env `AWS_REGION`}}",
+        "creation_date": "",
+        "vpc_id": "vpc-042aef62c68ce9210",
+        "subnet_id": "subnet-0b15e812b0a8c79dd",
         "environment": "dev"
     },
     "Builders": [{
         "type": "amazon-ebs",
-        "profile": "{{user `profile`}}",
         "region": "{{user `region`}}",
         "instance_type": "t2.micro",
         "source_ami_filter": {
