@@ -33,8 +33,8 @@ Usage of the Terraform CodePipeline module
 module "codepipline" {
     source = "git::https://bitbucket.org/synthesis_admin/module-aws-codepipeline.git"
 
-    project_name         = "wordpress-ami-pipeline"
-    project_description  = "wordpress AMI pipeline builder using the AMI builder repository"
+    project_name         = "ami-pipeline"
+    project_description  = "AMI pipeline builder using the AMI builder repository"
     artefact_bucket_name = "wordpress-ami-builder-artifact-bucket"
     
     # Name of the AMI-Builder CodeCommit Repository
@@ -50,6 +50,16 @@ module "codepipline" {
     }
 }
 ```
+### Git remote
+Use separate remotes to manage 2 repositories with one code base. Add the AWS CodeCommit repository as another remote. See below in Additinoal Reading for using Git Remote CodeCommit plugin. See snippet below.
+
+```bash 
+$ git remote add aws-codecommit codecommit::eu-west-1://profile-name@ami-builder        <-- Add CodeCommit remote url
+$ git push --all aws-codecommit                                                         <-- Push all local changes to the aws-codecommit remote configured
+$ git remote rm aws-codecommit                                                          <-- Remove the remote
+$ git push                                                                              <-- Push local changes to original remote
+```
+Note to always work on a development branch and ensure master is always default. Dont commit directly to master to ensure commit histories are alligned. After pushing changes to the respective remote origins, create a pull request to merge back onto master. 
 
 ### Additional Reading
 [Packer](https://packer.io/) 
@@ -58,4 +68,5 @@ module "codepipline" {
 
 [CodeBuild Build-Spec](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html)
 
+[Git Remote CodeCommit](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-git-remote-codecommit.html)
 **Branch For Sanlam Account
