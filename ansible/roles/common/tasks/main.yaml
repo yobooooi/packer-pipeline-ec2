@@ -12,3 +12,18 @@
     state: present
   become: true
   become_user: root 
+
+- name: install ssm-agent from rpm repo
+  yum:
+    name: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+    state: present
+  become: true
+  become_user: root
+
+- name: start and enable the ssm-agent
+  systemd:
+    name: amazon-ssm-agent
+    state: started
+    enabled: yes
+  become: true
+  become_user: root
