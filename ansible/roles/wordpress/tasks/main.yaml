@@ -9,14 +9,14 @@
     name: epel-release
     state: present
   become: true
-  become_user: root 
+  become_user: root
 
 - name: install remi-release
   yum:
     name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
     state: present
   become: true
-  become_user: root 
+  become_user: root
 
 - name: upgrade all packages
   yum:
@@ -26,7 +26,7 @@
   become_user: root
 
 - name: install php packages
-  yum: 
+  yum:
     name:
       - php70
       - php70-php
