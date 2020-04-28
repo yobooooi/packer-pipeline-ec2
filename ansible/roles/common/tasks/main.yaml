@@ -11,7 +11,7 @@
     name: git
     state: present
   become: true
-  become_user: root 
+  become_user: root
 
 - name: install ssm-agent from rpm repo
   yum:
