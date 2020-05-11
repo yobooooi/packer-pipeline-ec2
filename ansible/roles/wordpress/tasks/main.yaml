@@ -85,3 +85,10 @@
     enabled: yes
   become: true
   become_user: root
+
+- name: install mysql client
+  yum:
+    name: mysql
+    state: present
+  become: true
+  become_user: root
