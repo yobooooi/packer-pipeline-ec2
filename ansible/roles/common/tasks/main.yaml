@@ -6,9 +6,13 @@
   become: true
   become_user: root
 
-- name: install git
+- name: install common apps
   yum:
-    name: git
+    name:
+      - git
+      - amazon-efs-utils
+      - ruby
+      - wget
     state: present
   become: true
   become_user: root
@@ -23,6 +27,28 @@
 - name: start and enable the ssm-agent
   systemd:
     name: amazon-ssm-agent
+    state: started
+    enabled: yes
+  become: true
+  become_user: root
+
+- name: download code-deploy agent
+  get_url:
+    url: https://aws-codedeploy-eu-west-1.s3.amazonaws.com/latest/install
+    dest: /tmp/install.sh
+    mode: '0755'
+    state: present
+  become: true
+  become_user: root
+
+- name: install codedeploy agent using installation file
+  script: /tmp/install.sh auto
+  become: true
+  become_user: root
+
+- name: start and enable the codedeploy-agent
+  systemd:
+    name: codedeploy-agent
     state: started
     enabled: yes
   become: true
