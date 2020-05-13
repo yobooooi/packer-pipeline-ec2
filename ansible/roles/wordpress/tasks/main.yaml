@@ -78,10 +78,10 @@
   become: true
   become_user: root
 
-- name: copy http conf
+- name: copy httpd conf
   copy:
-    src: http.conf
-    dest: /etc/httpd/conf/http.conf
+    src: httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
     owner: root
     group: root
     mode: 0644
