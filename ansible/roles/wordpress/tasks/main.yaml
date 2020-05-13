@@ -78,6 +78,16 @@
   become: true
   become_user: root
 
+- name: copy http conf
+  copy:
+    src: http.conf
+    dest: /etc/httpd/conf/http.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  become_user: root
+
 - name: start and enable httpd
   systemd:
     name: httpd
