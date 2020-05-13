@@ -37,7 +37,6 @@
     url: https://aws-codedeploy-eu-west-1.s3.amazonaws.com/latest/install
     dest: /tmp/install.sh
     mode: '0755'
-    state: present
   become: true
   become_user: root
 
