@@ -78,10 +78,27 @@
   become: true
   become_user: root
 
+- name: copy httpd conf
+  copy:
+    src: httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true
+  become_user: root
+
 - name: start and enable httpd
   systemd:
     name: httpd
     state: started
     enabled: yes
+  become: true
+  become_user: root
+
+- name: install mysql client
+  yum:
+    name: mysql
+    state: present
   become: true
   become_user: root

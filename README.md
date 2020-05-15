@@ -33,8 +33,8 @@ Usage of the Terraform CodePipeline module
 module "codepipline" {
     source = "git::https://bitbucket.org/synthesis_admin/module-aws-codepipeline.git"
 
-    project_name         = "wordpress-ami-pipeline"
-    project_description  = "wordpress AMI pipeline builder using the AMI builder repository"
+    project_name         = "ami-pipeline"
+    project_description  = "AMI pipeline builder using the AMI builder repository"
     artefact_bucket_name = "wordpress-ami-builder-artifact-bucket"
 
     # Name of the AMI-Builder CodeCommit Repository
@@ -50,7 +50,6 @@ module "codepipline" {
     }
 }
 ```
-
 ### Git remote
 Use separate remotes to manage 2 repositories with one code base. Add the AWS CodeCommit repository as another remote. See below in Additinoal Reading for using Git Remote CodeCommit plugin. See snippet below.
 
