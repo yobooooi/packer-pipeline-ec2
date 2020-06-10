@@ -1,0 +1,28 @@
+---
+- name: enable epel package
+  shell: "amazon-linux-extras enable epel"
+  become: yes
+  become_user: root
+
+- name: install epel-release
+  yum:
+    name: epel-release
+    state: present
+  become: true
+  become_user: root
+
+- name: install squid packages
+  yum:
+    name:
+      - squid
+    state: present
+  become: yes
+  become_user: root
+
+- name: start and enable squid proxy
+  systemd:
+    name: squid
+    state: started
+    enabled: yes
+  become: true
+  become_user: root
