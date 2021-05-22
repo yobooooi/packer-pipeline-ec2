@@ -8,37 +8,41 @@
         "BuilderNumer": "{{env `CODEBUILD_BUILD_NUMBER`}}",
         "CodeBuildID": "{{env `CODEBUILD_BUILD_ID`}}"
     },
-    "Builders": [{
-        "type": "amazon-ebs",
-        "region": "{{user `region`}}",
-        "instance_type": "t2.micro",
-        "source_ami_filter": {
-            "filters": {
-              "virtualization-type": "hvm",
-              "name": "amzn2-ami-hvm-*-x86_64-gp2",
-              "root-device-type": "ebs"
+    "Builders": [
+        {
+            "type": "amazon-ebs",
+            "region": "{{user `region`}}",
+            "instance_type": "t2.micro",
+            "source_ami_filter": {
+                "filters": {
+                    "virtualization-type": "hvm",
+                    "name": "amzn2-ami-hvm-*-x86_64-gp2",
+                    "root-device-type": "ebs"
+                },
+                "owners": [
+                    "137112412989"
+                ],
+                "most_recent": true
             },
-            "owners": ["137112412989"],
-            "most_recent": true
-        },
-        "ssh_username": "ec2-user",
-        "ami_name": "{{user `environment`}}-squid-latest-AMZN-{{isotime \"02-Jan-06 03-04-05\"}}",
-        "ami_description": "Base squid AMI",
-        "run_tags": {
-            "Name": "Buidling ... {{user `environment`}}-squid-latest-AMZN-{{isotime \"02-Jan-06 03-04-05\"}}",
-            "TeamEmailAddress": "adan@synthesis.co.za",
-            "BuildBy": "Packer"
-        },
-        "tags": {
-            "Build_By": "Packer",
-            "Creation_Date": "{{user `creation_date`}}",
-            "Name": "{{user `environment`}}-squid-latest-AMZN-baseimage-{{isotime \"02-Jan-06 03-04-05\"}}",
-            "BuilderNumer": "{{user `BuilderNumer`}}",
-            "CodeBuildID" : "{{user `CodeBuildID`}}"
-        },
-        "vpc_id": "{{user `vpc_id`}}",
-        "subnet_id": "{{user `subnet_id`}}"
-    }],
+            "ssh_username": "ec2-user",
+            "ami_name": "{{user `environment`}}-squid-latest-AMZN-{{isotime \"02-Jan-06 03-04-05\"}}",
+            "ami_description": "Base squid AMI",
+            "run_tags": {
+                "Name": "Buidling ... {{user `environment`}}-squid-latest-AMZN-{{isotime \"02-Jan-06 03-04-05\"}}",
+                "TeamEmailAddress": "adan@synthesis.co.za",
+                "BuildBy": "Packer"
+            },
+            "tags": {
+                "Build_By": "Packer",
+                "Creation_Date": "{{user `creation_date`}}",
+                "Name": "{{user `environment`}}-squid-latest-AMZN-baseimage-{{isotime \"02-Jan-06 03-04-05\"}}",
+                "BuilderNumer": "{{user `BuilderNumer`}}",
+                "CodeBuildID": "{{user `CodeBuildID`}}"
+            },
+            "vpc_id": "{{user `vpc_id`}}",
+            "subnet_id": "{{user `subnet_id`}}"
+        }
+    ],
     "Provisioners": [
         {
             "type": "shell",
