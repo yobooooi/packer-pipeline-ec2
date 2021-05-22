@@ -1,12 +1,12 @@
 {
     "Variables": {
         "region": "{{env `AWS_REGION`}}",
-        "creation_date": "{{isotime \"02-Jan-06 03-04-05\"}}",
         "vpc_id": "{{env `VPC_ID`}}",
         "subnet_id": "{{env `SUBNET_ID`}}",
         "environment": "dev",
-        "BuilderNumer": "{{env `CODEBUILD_BUILD_NUMBER`}}",
-        "CodeBuildID": "{{env `CODEBUILD_BUILD_ID`}}"
+        "creation_date": "{{isotime \"02-Jan-06 03-04-05\"}}",
+        "build_number": "{{env `CODEBUILD_BUILD_NUMBER`}}",
+        "code_build_id": "{{env `CODEBUILD_BUILD_ID`}}"
     },
     "Builders": [
         {
@@ -29,15 +29,15 @@
             "ami_description": "Base squid AMI",
             "run_tags": {
                 "Name": "Buidling ... {{user `environment`}}-squid-latest-AMZN-{{isotime \"02-Jan-06 03-04-05\"}}",
-                "TeamEmailAddress": "adan@synthesis.co.za",
-                "BuildBy": "Packer"
+                "team_email_address": "team@contactme.com",
+                "build_by": "Packer"
             },
             "tags": {
-                "Build_By": "Packer",
-                "Creation_Date": "{{user `creation_date`}}",
                 "Name": "{{user `environment`}}-squid-latest-AMZN-baseimage-{{isotime \"02-Jan-06 03-04-05\"}}",
-                "BuilderNumer": "{{user `BuilderNumer`}}",
-                "CodeBuildID": "{{user `CodeBuildID`}}"
+                "build_by": "Packer",
+                "creation_date": "{{user `creation_date`}}",
+                "build_number": "{{user `build_number`}}",
+                "code_build_id": "{{user `code_build_id`}}"
             },
             "vpc_id": "{{user `vpc_id`}}",
             "subnet_id": "{{user `subnet_id`}}"
