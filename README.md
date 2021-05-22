@@ -30,19 +30,14 @@ Source Code Structure
 Usage of the Terraform CodePipeline module
 
 ```ruby
-module "codepipline" {
-    source = "git::https://bitbucket.org/synthesis_admin/module-aws-codepipeline.git"
+module "envel-wordpress-codepipline" {
+    source = "git::git@github.com:yobooooi/tfmodule-aws-codepipeline.git?ref=v1.0"
 
-    project_name         = "ami-pipeline"
-    project_description  = "AMI pipeline builder using the AMI builder repository"
-    artefact_bucket_name = "wordpress-ami-builder-artifact-bucket"
+    project_name         = "enveldemo-wordpress-ami-pipeline"
+    project_description  = "enveldemo-wordpress-ami-pipeline-demo"
+    artefact_bucket_name = "codepipline-artefacts"
+    source_repository    = "enveldemo-ami-builder"
 
-    # Name of the AMI-Builder CodeCommit Repository
-    source_repository    = "ami-builder"
-
-    # Environment Variables. PACKER_SCRIPT Required, because Build-Spec references
-    # the environment variable to determine which packerfile to build from. Other
-    # variables are optional.
     environment_vars = {
       PACKER_SCRIPT  = "packer-wordpress"
       VPC_ID         = "vpc-04f99e5833c3a909b"
