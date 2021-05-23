@@ -102,3 +102,18 @@
     state: present
   become: true
   become_user: root
+
+- name: download latest wordpress package
+  get_url:
+    url: https://wordpress.org/latest.tar.gz
+    dest: /tmp/latest.tar.gz
+  become: true
+  become_user: root
+
+- name: extract wordpress archive to /var/www/html
+  unarchive:
+    src: /tmp/latest.tar.gz
+    dest: /var/www/html
+    extra_opts: [--strip-components=1]
+  become: true
+  become_user: root
